@@ -58,4 +58,57 @@ describe('FullHeader ', () => {
     });
   });
 
+  context('textColor', () => {
+    it('should have textColor #fff when none is passed', () => {
+      const component = shallow(<FullHeader />);
+      expect(component).to.have.style('color').equal('#fff');
+    });
+
+    it('should have textColor #FF0000 when #FFF is passed', () => {
+      const component = shallow(<FullHeader textColor="#FF0000" />);
+      expect(component).to.have.style('color').equal('#FF0000');
+    });
+  });
+
+  context('Font', () => {
+    it('should have font sans-serif when none is passed', () => {
+      const component = shallow(<FullHeader />);
+      expect(component).to.have.style('font-family').equal('sans-serif');
+    });
+
+    it('should have font Open Sans when font is passed', () => {
+      const component = shallow(<FullHeader font="Open Sans" />);
+      expect(component).to.have.style('font-family').equal('Open Sans');
+    });
+  });
+
+  context('bgImage', () =>{
+    it('should have background-image equals empty when none is passed', () => {
+      const component = shallow(<FullHeader />);
+      expect(component).to.have.style('background-image').equal('url()');
+    });
+
+    it('should have background-image equals bg.jpg when passed', () => {
+      const component = shallow(<FullHeader bgImg="bg.jpg" />);
+      expect(component).to.have.style('background-image').equal('url(bg.jpg)');
+    });
+  });
+
+  context('Video', () => {
+    it('should have video tag when video is passed', () => {
+      const component = shallow(<FullHeader video="JS com TDD" />);
+      expect(component.find('video')).to.have.length(1);
+    });
+
+    it('should not have video tag when video is not passed', () => {
+      const component = shallow(<FullHeader />);
+      expect(component.find('video')).to.have.length(0);
+    });
+
+    it('should have video tag with video passed by props', () => {
+      const component = shallow(<FullHeader video="my_video.mp4" />);
+      expect(component.find('video').props().src).to.be.equal("my_video.mp4");
+    });
+  });
+
 });
